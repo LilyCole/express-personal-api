@@ -7,7 +7,7 @@
     <title>Blank</title>
 
     <!-- STYLESHEETS -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/skeleton/2.0.4/skeleton.min.css">
     <link rel="stylesheet" href="/styles/styles.css">
 
     <!-- VENDOR SCRIPTS -->
@@ -20,10 +20,19 @@
   <body>
     <div class="container">
       <div class="row">
-        <div class="col-md-8 col-md-offset-2">
-          <h1>Under Construction</h1>
-          <h4><a href="/api">Read My API Documentation</a></h4>
-        </div>
+          <div class="twelve columns"><h1>Hello!</h1></div>
+      </div>
+      <div class="row" id="places">
+          <form method="POST" action="/api/places/">
+            <label id="formIntro" name="formIntro">Enter Place Information:</label>
+            <input id="description" name="description" placeholder="Description of Place">
+            <input id="town" name="town" placeholder="Town">
+            <input id="state" name="state" placeholder="State ">
+            <input type="submit" value="Create Place">
+          </form>
+      </div>
+      <div class="row">
+          <div class="twelve columns"><a href="/api">Read My API Documentation</a></div>
       </div>
     </div>
   </body>

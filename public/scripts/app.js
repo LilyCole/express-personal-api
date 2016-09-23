@@ -8,8 +8,8 @@ $(document).ready(function(){
 		success: function(data) {
 			for(var i=0; i<data.length;i++){
 				var place = data[i];
-				$('body').append('<strong>Description:</strong> '+place.description+'<br>');
-				$('body').append('<strong>Place:</strong>'+place.town+', '+place.state+', '+place.country+'<br>');
+				$('#places').append('<strong>Description:</strong> '+place.description+'<br>');
+				$('#places').append('<strong>Place:</strong>'+place.town+', '+place.state+', '+place.country+'<br>');
 			}
 		}
 	})
