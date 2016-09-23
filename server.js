@@ -15,11 +15,25 @@ app.use(function(req, res, next) {
   next();
 });
 
+
+/************************
+ * HARDCODED PROFILE DATA *
+ ************************/
+
+var newProfile = [ {
+  name: 'Lily',
+  githubLink: 'https://github.com/LilyCole/',
+  githubProfileImage: 'https://avatars2.githubusercontent.com/u/20937116?v=3&s=466',
+  personalSiteLink: 'http://www.ToursByLily.com',
+  currentCity: 'San Francisco',
+  pets: [{name: 'Goober', type: 'Cat', breed: 'Jerk'}, {name: 'Logan', type: 'Dog', breed: 'Mutt'}]
+} ];
+
 /************
  * DATABASE *
  ************/
 
-// var db = require('./models');
+var db = require('./models');
 
 /**********
  * ROUTES *
@@ -48,12 +62,31 @@ app.get('/api', function api_index(req, res) {
     woopsIForgotToDocumentAllMyEndpoints: true, // CHANGE ME ;)
     message: "Welcome to my personal api! Here's what you need to know!",
     documentationUrl: "https://github.com/example-username/express_self_api/README.md", // CHANGE ME
-    baseUrl: "http://YOUR-APP-NAME.herokuapp.com", // CHANGE ME
+    baseUrl: "https://warm-plains-40549.herokuapp.com", 
     endpoints: [
       {method: "GET", path: "/api", description: "Describes all available endpoints"},
-      {method: "GET", path: "/api/profile", description: "Data about me"}, // CHANGE ME
-      {method: "POST", path: "/api/campsites", description: "E.g. Create a new campsite"} // CHANGE ME
+      {method: "GET", path: "/api/profile", description: "Data about me"}, 
+      {method: "POST", path: "/api/places", description: "Places I've lived"}, 
+      {method: "POST", path: "/api/places/:id", description: "Info on a Specific Place"} 
     ]
+  })
+});
+
+app.get('/api/profile', function showProfile(req, res) {
+  res.json(newProfile);
+});
+
+app.get('/api/places', function showplaces(req, res) {
+  db.Place.find({}, function(err,places) {
+    if(err) { throw (err) };
+    res.json(places);
+  })
+});
+
+app.get('/api/places/:id', function showPlace(req, res) {
+  db.Place.find({ _id: req.params.id }, function(err,foundPlace) {
+    if(err) { throw (err) };
+    res.json(foundPlace);
   })
 });
 
