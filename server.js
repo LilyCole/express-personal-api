@@ -66,8 +66,9 @@ app.get('/api', function api_index(req, res) {
     endpoints: [
       {method: "GET", path: "/api", description: "Describes all available endpoints"},
       {method: "GET", path: "/api/profile", description: "Data about me"}, 
-      {method: "POST", path: "/api/places", description: "Places I've lived"}, 
-      {method: "POST", path: "/api/places/:id", description: "Info on a Specific Place"} 
+      {method: "GET", path: "/api/places", description: "Places I've lived"}, 
+      {method: "GET", path: "/api/places/:id", description: "Info on a Specific Place"},
+      {method: "POST", path: "/api/places/", description: "Add a new Place"}  
     ]
   })
 });
@@ -80,6 +81,13 @@ app.get('/api/places', function showplaces(req, res) {
   db.Place.find({}, function(err,places) {
     if(err) { throw (err) };
     res.json(places);
+  })
+});
+
+app.get('/api/places/:id', function showPlace(req, res) {
+  db.Place.find({ _id: req.params.id }, function(err,foundPlace) {
+    if(err) { throw (err) };
+    res.json(foundPlace);
   })
 });
 
