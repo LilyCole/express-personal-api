@@ -91,11 +91,18 @@ app.get('/api/places/:id', function showPlace(req, res) {
   })
 });
 
-app.get('/api/places/:id', function showPlace(req, res) {
-  db.Place.find({ _id: req.params.id }, function(err,foundPlace) {
-    if(err) { throw (err) };
-    res.json(foundPlace);
-  })
+app.post('/api/places', function createPlace(req, res) {
+  // create new place with form data (`req.body`)
+  var newPlace = new db.Place({
+    description: req.body.description,
+    town: req.body.town,
+    state: req.body.state,
+    country: req.body.country,
+  });
+  newPlace.save(function(err, place){
+    if (err) { throw (err) };
+    res.json(place);
+  });
 });
 
 /**********

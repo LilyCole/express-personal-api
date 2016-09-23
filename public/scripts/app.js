@@ -14,12 +14,24 @@ $(document).ready(function(){
 		}
 	})
 
+	$('#newPlaceForm').on('submit', function(e) {
+	    e.preventDefault();
+	    $.ajax({
+	      method: 'POST',
+	      url: '/api/places',
+	      data: $(this).serializeArray(),
+	      success: newPlaceSuccess,
+	      error: newPlaceError
+    	});
+  	});
+
+  	function newPlaceSuccess(data) {
+
+  		$('#places').append('<strong>Description:</strong> '+data.description+'<br>');
+		$('#places').append('<strong>Place:</strong>'+data.town+', '+data.state+', '+data.country+'<br>');
+  	};
+
+  	function newPlaceError(err) {
+  		console.log(err);
+  	};
 });
-
-
-//   town: 'Manila',
-//   state: 'N/A',
-//   country: 'Philippines',
-//   years: 2,
-//   gps: { lat: 14.5995, long: 120.9842 },
-//   photo:

@@ -23,11 +23,12 @@
           <div class="twelve columns"><h1>Hello!</h1></div>
       </div>
       <div class="row" id="places">
-          <form method="POST" action="/api/places/">
+          <form id="newPlaceForm" method="POST" action="/api/places/">
             <label id="formIntro" name="formIntro">Enter Place Information:</label>
             <input id="description" name="description" placeholder="Description of Place">
             <input id="town" name="town" placeholder="Town">
-            <input id="state" name="state" placeholder="State ">
+            <input id="state" name="state" placeholder="State">
+            <input id="country" name="country" placeholder="Country">
             <input type="submit" value="Create Place">
           </form>
       </div>
