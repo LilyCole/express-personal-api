@@ -26,11 +26,6 @@
           </div>
       </div>
       <div class="row">
-          <div class="three columns" id="profileImg">
-            <script id="profile-img" type="text/x-handlebars-template">
-              <img src='{{githubProfileImage}}'>
-            </script>
-          </div>
           <div class="nine columns" id="profileInfo">
             <script id="profile-info" type="text/x-handlebars-template">
               <p></p>
@@ -40,15 +35,32 @@
               <p></p>
             </script>          
           </div>
+          <div class="three columns" id="profileImg">
+            <script id="profile-img" type="text/x-handlebars-template">
+              <img src='{{githubProfileImage}}'>
+            </script>
+          </div>
+
       </div>
       <div class="row" id="places">
-          <table>
-            <tr>
-              <td><strong>Description:</strong></td>
-              <td></td>
-            </tr>
-          </table>
-
+        <script id="place-info" type="text/x-handlebars-template">
+          {{#each place}}
+        <div class="row">
+          <div class="three columns">
+            <img src="{{photo}}">
+          </div>
+          <div class="six columns placeInfo">
+            <p><strong>Description:</strong> {{description}}</p>
+            <p><strong>Place:</strong> {{town}}, {{city}}, {{country}}</p>
+            <p><strong>Years Lived There:</strong>  {{years}}</p>
+            <p><strong>Lat:</strong> {{gps.lat}} <strong>Long:</strong> {{gps.long}}</p>
+          </div>
+          <div class="three columns">
+            <button type="submit" class="deleteButton">DELETE</button>
+          </div>
+        </div>
+          {{/each}}
+        </script>
       </div>
       <div class="row">
           <form id="newPlaceForm" method="POST" action="/api/places/">

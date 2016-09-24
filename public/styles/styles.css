@@ -15,10 +15,15 @@ h1 {
 
 img {
   height: 200px;
+  width: 200px;
   border-radius: 20px;
 }
 
-#profileInfo {
+#profileInfo, .placeInfo {
   text-align: left;
   padding: 0 0 0 20px;
+}
+
+.deleteButton {
+  margin: 30%;
 }
