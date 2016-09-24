@@ -106,6 +106,14 @@ app.post('/api/places', function createPlace(req, res) {
   });
 });
 
+app.delete('/api/places/:id', function deletePlace(req, res) {
+  // remove place
+  db.Place.remove({ _id: req.params.id }, function(err, place){
+    if (err) { throw (err) };
+    res.json(place);
+  });
+});
+
 /**********
  * SERVER *
  **********/

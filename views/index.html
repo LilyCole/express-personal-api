@@ -30,7 +30,7 @@
             <script id="profile-info" type="text/x-handlebars-template">
               <p></p>
               <p><strong><a href="http://www.toursbyLily.com">{{name}}</a></strong></p>
-              <p><strong>Git Hub:</strong> {{githubLink}}/</p>
+              <p><strong>Git Hub:</strong> <a href='{{githubLink}}'>{{githubLink}}</a></p>
               <p><strong>Current City:</strong> {{currentCity}}</p>
               <p></p>
             </script>          
@@ -51,12 +51,12 @@
           </div>
           <div class="six columns placeInfo">
             <p><strong>Description:</strong> {{description}}</p>
-            <p><strong>Place:</strong> {{town}}, {{city}}, {{country}}</p>
+            <p><strong>Place:</strong> {{town}}, {{state}}, {{country}}</p>
             <p><strong>Years Lived There:</strong>  {{years}}</p>
             <p><strong>Lat:</strong> {{gps.lat}} <strong>Long:</strong> {{gps.long}}</p>
           </div>
           <div class="three columns">
-            <button type="submit" class="deleteButton">DELETE</button>
+            <button type="submit" class="deleteButton" id={{_id}}>DELETE</button>
           </div>
         </div>
           {{/each}}
@@ -68,7 +68,10 @@
             <input id="description" name="description" placeholder="Description of Place">
             <input id="town" name="town" placeholder="Town">
             <input id="state" name="state" placeholder="State">
-            <input id="country" name="country" placeholder="Country">
+            <input id="country" name="country" placeholder="Country"><BR>
+            <input id="image" name="image" placeholder="Image URL">
+            <input id="lat" name="lat" placeholder="Location: Latitude">
+            <input id="long" name="long" placeholder="Location: Longitude">
             <input type="submit" value="Create Place">
           </form>
       </div>
