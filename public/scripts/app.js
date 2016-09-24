@@ -65,6 +65,7 @@ $(document).ready(function(){
   function newPlace(data) {
     var placeHtml = template(data);
     $('#places').append(placeHtml);
+    clearFormData();
   };
 
   // Delete Place Success
@@ -77,6 +78,15 @@ $(document).ready(function(){
   // Handle Error
   function handleError(err) {
     console.log("Err:",err);
+  };
+
+  // Clear Form Data for Clean-Up
+  function clearFormData() {
+    var formFields = $('#newPlaceForm')[0];
+    var formFieldsLength = formFields.length;
+    for(var i = 0; i < formFieldsLength-1; i++ ) {
+      formFields[i].value = '';
+    }
   };
   
 });

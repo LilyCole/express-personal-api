@@ -29,7 +29,6 @@ var newProfile = [ {
   pets: [{name: 'Goober', type: 'Cat', breed: 'Jerk'}, {name: 'Logan', type: 'Dog', breed: 'Pitt Mutt'}]
 } ];
 
-// , {name: 'Logan', type: 'Dog', breed: 'Mutt'}
 /************
  * DATABASE *
  ************/
@@ -57,8 +56,8 @@ app.get('/', function homepage(req, res) {
  * JSON API Endpoints
  */
 
+// '/api' shows all Endpoints
 app.get('/api', function api_index(req, res) {
-  // TODO: Document all your api endpoints below
   res.json({
     message: "Welcome to my personal api! Here's what you need to know!",
     documentationUrl: "https://github.com/example-username/express_self_api/README.md", // CHANGE ME
@@ -66,25 +65,44 @@ app.get('/api', function api_index(req, res) {
     endpoints: [
       {method: "GET", path: "/api", description: "Describes all available endpoints"},
       {method: "GET", path: "/api/profile", description: "Data about me"}, 
-      {method: "GET", path: "/api/places", description: "Places I've lived"}, 
+      {method: "GET", path: "/api/places", description: "Shows all Places I've lived. Use ?limit=specifiedNumber query to show specified amount of Places."}, 
       {method: "GET", path: "/api/places/:id", description: "Info on a Specific Place"},
       {method: "POST", path: "/api/places/", description: "Add a new Place"}, 
-      {method: "DELETE", path: "/api/places/:id", description: "Delete a Specific Place"}  
+      {method: "DELETE", path: "/api/places/:id", description: "Delete a Specific Place"},
+      {method: "PUT", path: "/api/places/:id", description: "Update a Specific Place. Not implemented on the front end."} 
     ]
   })
 });
 
+// '/api/profile' shows Data about me
 app.get('/api/profile', function showProfile(req, res) {
   res.json(newProfile);
 });
 
-app.get('/api/places', function showplaces(req, res) {
+// '/api/places' shows all Places I've lived. Use ?limit=specifiedNumber query to show specified amount of Places
+app.get('/api/places', function showLimitedPlaces(req, res) {
+  var limit = req.query.limit;
+  var returnPlaces = [{}];
   db.Place.find({}, function(err,places) {
-    if(err) { throw (err) };
-    res.json(places);
+    if(err) { 
+        throw (err) 
+    } else {
+      if(limit) {
+        if(limit>places.length) {
+          limit=places.length
+        }
+        for(var i = 0; i < limit; i++) {
+          returnPlaces.push(places[i]);
+        }
+        res.json(returnPlaces);
+      } else {
+        res.json(places);
+      }
+    }
   })
 });
 
+// '/api/places/:id' shows info on a Specific Place
 app.get('/api/places/:id', function showPlace(req, res) {
   db.Place.findOne({ _id: req.params.id }, function(err,foundPlace) {
     if(err) { throw (err) };
@@ -92,16 +110,16 @@ app.get('/api/places/:id', function showPlace(req, res) {
   })
 });
 
+// '/api/places' creates a new Place
 app.post('/api/places', function createPlace(req, res) {
-  // create new place with form data (`req.body`)
   var newPlace = new db.Place({
-    description: req.body.description,
-    town: req.body.town,
-    state: req.body.state,
-    country: req.body.country,
-    years: req.body.years,
-    photo: req.body.image,
-    gps: { lat: req.body.lat, long: req.body.long }
+    description: req.body.description || 'N/A',
+    town: req.body.town || 'N/A',
+    state: req.body.state || 'N/A',
+    country: req.body.country || 'N/A',
+    years: req.body.years || 0,
+    photo: req.body.image || 'http://pioneerpokerleague.com/wp-content/uploads/2015/02/A-New-Place.png',
+    gps: { lat: req.body.lat || 'N/A', long: req.body.long || 'N/A' }
   });
   newPlace.save(function(err, place){
     if (err) { throw (err) };
@@ -109,11 +127,33 @@ app.post('/api/places', function createPlace(req, res) {
   });
 });
 
+// '/api/places/:id' destroys a a Specific Place
 app.delete('/api/places/:id', function deletePlace(req, res) {
-  // remove place
   db.Place.findByIdAndRemove(req.params.id, function(err, removePlace){
     if (err) { console.log("error from delete:",err) };
     res.json(removePlace);
+  });
+});
+
+// '/api/places/:id' udpates a a Specific Place
+// NOT IMPLEMENTED ON THE FRONT END
+app.put('/api/places/:id', function updatePlace(req, res) {
+  var updatedPlace = {};
+  db.Place.findByIdAndRemove({ _id: req.params.id }, function(err,removePlace) {
+    if(err) { throw (err) };
+    res.json(removePlace);
+  });
+  updatedPlace.description = req.body.description,
+  updatedPlace.town = req.body.town,
+  updatedPlace.state = req.body.state,
+  updatedPlace.country = req.body.country,
+  updatedPlace.years = req.body.years,
+  updatedPlace.photo = req.body.image,
+  updatedPlace.gps.lat = req.body.lat,
+  updatedPlace.gps.long = req.body.long
+  updatedPlace.save(function(err, place){
+    if (err) { throw (err) };
+    res.json(place);
   });
 });
 

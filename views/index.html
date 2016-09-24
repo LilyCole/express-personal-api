@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>Blank</title>
+    <title>🍝 Lily's Profile Page 🍝</title>
 
     <!-- STYLESHEETS -->
     <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/skeleton/2.0.4/skeleton.min.css">
@@ -34,11 +34,15 @@
         <script id="profile-info" type="text/x-handlebars-template">
           <div class="row">
             <div class="nine columns">  
-              <p></p>
               <p><strong><a href="http://www.toursbyLily.com">{{name}}</a></strong></p>
               <p><strong>Git Hub:</strong> <a href='{{githubLink}}'>{{githubLink}}</a></p>
               <p><strong>Current City:</strong> {{currentCity}}</p>
-              <p></p>          
+              <p><strong>Pets:</strong> 
+                  {{#each pets}}
+                    {{name}} (Type: {{type}}, Breed: {{breed}})
+                  {{/each}}
+                  </a>
+              </p>          
             </div>
             <div class="three columns" id="profileImg">
               <img src={{githubProfileImage}}>
@@ -69,47 +73,18 @@
         </script>
       </div>
 
-      <!-- LIST OF PLACES -->
-<!--       <div class="row" id="places">
-        <script id="place-info" type="text/x-handlebars-template">
-          <div class="row place">
-          <form id="{{_id}}" class="button-form" method="DELETE" action="/api/places/{{_id}}">
-              <div class="three columns">
-                <img src="{{photo}}">
-                </div>
-              <div class="six columns placeInfo">
-                <p><strong>Description:</strong> {{description}}</p>
-                <input type="hidden" name="description" value={{description}}>
-                <p><strong>Place:</strong> {{town}}, {{state}}, {{country}}</p>
-                <input type="hidden" name="town" value={{town}}>
-                <input type="hidden" name="state" value={{state}}>
-                <input type="hidden" name="country" value={{country}}>
-                <p><strong>Years Lived There:</strong>  {{years}}</p>
-                <input type="hidden" name="years" value={{years}}>
-                <p><strong>Lat:</strong> {{gps.lat}} <strong>Long:</strong> {{gps.long}}</p>
-                <input type="hidden" name="lat" value={{gps.lat}}>
-                <input type="hidden" name="long" value={{gps.long}}>
-              </div>
-              <div class="three columns">
-                <button type="submit" class="deleteButton" id={{_id}}>DELETE</button>
-              </div>
-            </form>
-          </div> 
-        </script>
-      </div> -->
-
       <!-- NEW PLACE FORM -->
       <div class="row">
         <form id="newPlaceForm" method="POST" action="/api/places/">
         <label id="formIntro" name="formIntro">Add a new Place:</label>
-        <input id="description" name="description" placeholder="Description of Place">
-        <input id="town" name="town" placeholder="Town">
-        <input id="state" name="state" placeholder="State">
-        <input id="country" name="country" placeholder="Country"><BR>
-        <input id="image" name="image" placeholder="Image URL">
-        <input id="years" name="years" placeholder="Years Lived There">
-        <input id="lat" name="lat" placeholder="Location: Latitude">
-        <input id="long" name="long" placeholder="Location: Longitude"><BR>
+        <input id="description" name="description" type="text" placeholder="Description of Place">
+        <input id="town" name="town" type="text" placeholder="Town">
+        <input id="state" name="state" type="text" placeholder="State">
+        <input id="country" name="country" type="text" placeholder="Country"><BR>
+        <input id="image" name="image" type="text" placeholder="Image URL">
+        <input id="years" name="years" type="number" placeholder="Years Lived There">
+        <input id="lat" name="lat" type="text" placeholder="Location: Latitude">
+        <input id="long" name="long" type="text" placeholder="Location: Longitude"><BR>
         <input type="submit" value="Create Place">
         </form>
       </div>
