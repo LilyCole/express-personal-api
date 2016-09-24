@@ -24,7 +24,7 @@ var newProfile = [ {
   name: 'Lily Cole',
   githubLink: 'https://github.com/LilyCole/',
   githubProfileImage: 'https://avatars2.githubusercontent.com/u/20937116?v=3&s=466',
-  personalSiteLink: 'http://www.ToursByLily.com',
+  personalSiteLink: 'https://lilycole.github.io/',
   currentCity: 'San Francisco',
   pets: [{name: 'Goober', type: 'Cat', breed: 'Jerk'}, {name: 'Logan', type: 'Dog', breed: 'Pitt Mutt'}]
 } ];
