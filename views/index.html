@@ -20,11 +20,39 @@
   <body>
     <div class="container">
       <div class="row">
-          <div class="twelve columns"><h1>Hello!</h1></div>
+          <div class="twelve columns">
+            <h1>Hello!</h1>
+            <h2>About Me</h2>
+          </div>
+      </div>
+      <div class="row">
+          <div class="three columns" id="profileImg">
+            <script id="profile-img" type="text/x-handlebars-template">
+              <img src='{{githubProfileImage}}'>
+            </script>
+          </div>
+          <div class="nine columns" id="profileInfo">
+            <script id="profile-info" type="text/x-handlebars-template">
+              <p></p>
+              <p><strong><a href="http://www.toursbyLily.com">{{name}}</a></strong></p>
+              <p><strong>Git Hub:</strong> {{githubLink}}/</p>
+              <p><strong>Current City:</strong> {{currentCity}}</p>
+              <p></p>
+            </script>          
+          </div>
       </div>
       <div class="row" id="places">
+          <table>
+            <tr>
+              <td><strong>Description:</strong></td>
+              <td></td>
+            </tr>
+          </table>
+
+      </div>
+      <div class="row">
           <form id="newPlaceForm" method="POST" action="/api/places/">
-            <label id="formIntro" name="formIntro">Enter Place Information:</label>
+            <label id="formIntro" name="formIntro">Add a new Place:</label>
             <input id="description" name="description" placeholder="Description of Place">
             <input id="town" name="town" placeholder="Town">
             <input id="state" name="state" placeholder="State">

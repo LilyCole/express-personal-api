@@ -21,14 +21,15 @@ app.use(function(req, res, next) {
  ************************/
 
 var newProfile = [ {
-  name: 'Lily',
+  name: 'Lily Cole',
   githubLink: 'https://github.com/LilyCole/',
   githubProfileImage: 'https://avatars2.githubusercontent.com/u/20937116?v=3&s=466',
   personalSiteLink: 'http://www.ToursByLily.com',
   currentCity: 'San Francisco',
-  pets: [{name: 'Goober', type: 'Cat', breed: 'Jerk'}, {name: 'Logan', type: 'Dog', breed: 'Mutt'}]
+  pets: [{name: 'Goober', type: 'Cat', breed: 'Jerk'}]
 } ];
 
+// , {name: 'Logan', type: 'Dog', breed: 'Mutt'}
 /************
  * DATABASE *
  ************/
@@ -113,3 +114,5 @@ app.post('/api/places', function createPlace(req, res) {
 app.listen(process.env.PORT || 3000, function () {
   console.log('Express server is up and running on http://localhost:3000/');
 });
+
+module.exports = newProfile;

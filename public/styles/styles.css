@@ -12,3 +12,13 @@ h1 {
 #places {
   text-align: left;
 }
+
+img {
+  height: 200px;
+  border-radius: 20px;
+}
+
+#profileInfo {
+  text-align: left;
+  padding: 0 0 0 20px;
+}
