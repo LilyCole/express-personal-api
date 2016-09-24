@@ -51,7 +51,7 @@
       <div class="row" id="places">
         <script id="place-info" type="text/x-handlebars-template">
           
-            <div class="row">
+            <div class="{{_id}} row">
               <div class="three columns">
                 <img src="{{photo}}">
                 </div>
@@ -70,10 +70,10 @@
       </div>
 
       <!-- LIST OF PLACES -->
- <!--      <div class="row" id="places">
+<!--       <div class="row" id="places">
         <script id="place-info" type="text/x-handlebars-template">
           <div class="row place">
-          <form id="{{_id}}" method="DELETE" action="/api/places/{{_id}}">
+          <form id="{{_id}}" class="button-form" method="DELETE" action="/api/places/{{_id}}">
               <div class="three columns">
                 <img src="{{photo}}">
                 </div>
@@ -117,6 +117,7 @@
       <!-- API DOCUMENTATION -->
       <div class="row">
         <div class="twelve columns"><a href="/api">Read My API Documentation</a></div>
+        </form>
       </div>
 
     </div> <!-- END CONTAINER -->

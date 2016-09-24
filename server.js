@@ -86,7 +86,7 @@ app.get('/api/places', function showplaces(req, res) {
 });
 
 app.get('/api/places/:id', function showPlace(req, res) {
-  db.Place.find({ _id: req.params.id }, function(err,foundPlace) {
+  db.Place.findOne({ _id: req.params.id }, function(err,foundPlace) {
     if(err) { throw (err) };
     res.json(foundPlace);
   })
@@ -111,10 +111,9 @@ app.post('/api/places', function createPlace(req, res) {
 
 app.delete('/api/places/:id', function deletePlace(req, res) {
   // remove place
-  db.Place.remove({ _id: req.params.id }, function(err, place){
-    if (err) { throw (err) };
-    console.log("RESPONDING WITH DELETE JSON:",place)
-    res.json(place);
+  db.Place.findByIdAndRemove(req.params.id, function(err, removePlace){
+    if (err) { console.log("error from delete:",err) };
+    res.json(removePlace);
   });
 });
 
