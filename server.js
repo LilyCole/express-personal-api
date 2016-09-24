@@ -26,7 +26,7 @@ var newProfile = [ {
   githubProfileImage: 'https://avatars2.githubusercontent.com/u/20937116?v=3&s=466',
   personalSiteLink: 'http://www.ToursByLily.com',
   currentCity: 'San Francisco',
-  pets: [{name: 'Goober', type: 'Cat', breed: 'Jerk'}]
+  pets: [{name: 'Goober', type: 'Cat', breed: 'Jerk'}, {name: 'Logan', type: 'Dog', breed: 'Pitt Mutt'}]
 } ];
 
 // , {name: 'Logan', type: 'Dog', breed: 'Mutt'}
@@ -60,7 +60,6 @@ app.get('/', function homepage(req, res) {
 app.get('/api', function api_index(req, res) {
   // TODO: Document all your api endpoints below
   res.json({
-    woopsIForgotToDocumentAllMyEndpoints: true, // CHANGE ME ;)
     message: "Welcome to my personal api! Here's what you need to know!",
     documentationUrl: "https://github.com/example-username/express_self_api/README.md", // CHANGE ME
     baseUrl: "https://warm-plains-40549.herokuapp.com", 
@@ -69,7 +68,8 @@ app.get('/api', function api_index(req, res) {
       {method: "GET", path: "/api/profile", description: "Data about me"}, 
       {method: "GET", path: "/api/places", description: "Places I've lived"}, 
       {method: "GET", path: "/api/places/:id", description: "Info on a Specific Place"},
-      {method: "POST", path: "/api/places/", description: "Add a new Place"}  
+      {method: "POST", path: "/api/places/", description: "Add a new Place"}, 
+      {method: "DELETE", path: "/api/places/:id", description: "Delete a Specific Place"}  
     ]
   })
 });
@@ -99,6 +99,9 @@ app.post('/api/places', function createPlace(req, res) {
     town: req.body.town,
     state: req.body.state,
     country: req.body.country,
+    years: req.body.years,
+    photo: req.body.image,
+    gps: { lat: req.body.lat, long: req.body.long }
   });
   newPlace.save(function(err, place){
     if (err) { throw (err) };

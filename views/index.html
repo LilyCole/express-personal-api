@@ -17,67 +17,79 @@
     <!-- APPLICATION SCRIPTS -->
     <script src="/scripts/app.js"></script>
   </head>
+
   <body>
     <div class="container">
+
+      <!-- PAGE TITLE -->
       <div class="row">
-          <div class="twelve columns">
-            <h1>Hello!</h1>
-            <h2>About Me</h2>
-          </div>
+        <div class="twelve columns">
+          <h1>Hello!</h1>
+          <h2>About Me</h2>
+        </div>
       </div>
-      <div class="row">
-          <div class="nine columns" id="profileInfo">
-            <script id="profile-info" type="text/x-handlebars-template">
+
+      <!-- PROFILE INFORMATION -->
+      <div class="row" id="profile">
+        <script id="profile-info" type="text/x-handlebars-template">
+          <div class="row">
+            <div class="nine columns">  
               <p></p>
               <p><strong><a href="http://www.toursbyLily.com">{{name}}</a></strong></p>
               <p><strong>Git Hub:</strong> <a href='{{githubLink}}'>{{githubLink}}</a></p>
               <p><strong>Current City:</strong> {{currentCity}}</p>
-              <p></p>
-            </script>          
+              <p></p>          
+            </div>
+            <div class="three columns" id="profileImg">
+              <img src={{githubProfileImage}}>
+            </div>
           </div>
-          <div class="three columns" id="profileImg">
-            <script id="profile-img" type="text/x-handlebars-template">
-              <img src='{{githubProfileImage}}'>
-            </script>
-          </div>
-
+        </script>
       </div>
+
+      <!-- LIST OF PLACES -->
       <div class="row" id="places">
         <script id="place-info" type="text/x-handlebars-template">
           {{#each place}}
-        <div class="row">
-          <div class="three columns">
-            <img src="{{photo}}">
-          </div>
-          <div class="six columns placeInfo">
-            <p><strong>Description:</strong> {{description}}</p>
-            <p><strong>Place:</strong> {{town}}, {{state}}, {{country}}</p>
-            <p><strong>Years Lived There:</strong>  {{years}}</p>
-            <p><strong>Lat:</strong> {{gps.lat}} <strong>Long:</strong> {{gps.long}}</p>
-          </div>
-          <div class="three columns">
-            <button type="submit" class="deleteButton" id={{_id}}>DELETE</button>
-          </div>
-        </div>
+            <div class="row">
+              <div class="three columns">
+                <img src="{{photo}}">
+                </div>
+              <div class="six columns placeInfo">
+                <p><strong>Description:</strong> {{description}}</p>
+                <p><strong>Place:</strong> {{town}}, {{state}}, {{country}}</p>
+                <p><strong>Years Lived There:</strong>  {{years}}</p>
+                <p><strong>Lat:</strong> {{gps.lat}} <strong>Long:</strong> {{gps.long}}</p>
+              </div>
+              <div class="three columns">
+                <button type="submit" class="deleteButton" id={{_id}}>DELETE</button>
+              </div>
+            </div>
           {{/each}}
         </script>
       </div>
+
+      <!-- NEW PLACE FORM -->
       <div class="row">
-          <form id="newPlaceForm" method="POST" action="/api/places/">
-            <label id="formIntro" name="formIntro">Add a new Place:</label>
-            <input id="description" name="description" placeholder="Description of Place">
-            <input id="town" name="town" placeholder="Town">
-            <input id="state" name="state" placeholder="State">
-            <input id="country" name="country" placeholder="Country"><BR>
-            <input id="image" name="image" placeholder="Image URL">
-            <input id="lat" name="lat" placeholder="Location: Latitude">
-            <input id="long" name="long" placeholder="Location: Longitude">
-            <input type="submit" value="Create Place">
-          </form>
+        <form id="newPlaceForm" method="POST" action="/api/places/">
+        <label id="formIntro" name="formIntro">Add a new Place:</label>
+        <input id="description" name="description" placeholder="Description of Place">
+        <input id="town" name="town" placeholder="Town">
+        <input id="state" name="state" placeholder="State">
+        <input id="country" name="country" placeholder="Country"><BR>
+        <input id="image" name="image" placeholder="Image URL">
+        <input id="years" name="years" placeholder="Years Lived There">
+        <input id="lat" name="lat" placeholder="Location: Latitude">
+        <input id="long" name="long" placeholder="Location: Longitude"><BR>
+        <input type="submit" value="Create Place">
+        </form>
       </div>
+
+      <!-- API DOCUMENTATION -->
       <div class="row">
-          <div class="twelve columns"><a href="/api">Read My API Documentation</a></div>
+        <div class="twelve columns"><a href="/api">Read My API Documentation</a></div>
       </div>
-    </div>
+
+    </div> <!-- END CONTAINER -->
   </body>
 </html>

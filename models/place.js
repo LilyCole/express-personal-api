@@ -7,7 +7,7 @@ var PlaceSchema = new Schema({
   state: String,
   country: String,
   years: Number,
-  gps: { lat: Number, long: Number },
+  gps: { lat: String, long: String },
   photo: String
 });
 

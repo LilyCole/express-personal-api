@@ -2,6 +2,10 @@ console.log("Sanity Check: JS is working!");
 
 $(document).ready(function(){
 
+  var source = $('#place-info').html();
+  var template = Handlebars.compile(source); 
+  var allPlaces = [];
+
   // AJAX to show profile Image and Information
   $.ajax({
     method: 'GET',
@@ -34,6 +38,7 @@ $(document).ready(function(){
   $('#places').on('click', '.deleteButton', function() {
     console.log("this:",this);
     console.log('clicked delete button to', '/api/books/'+$(this).attr('id'));
+    // console.log('data,'+$(this).serializeArray());
     $.ajax({
       method: 'DELETE',
       url: '/api/places/'+$(this).attr('id'),
@@ -45,48 +50,59 @@ $(document).ready(function(){
 
   // Show Profile Success
   function showProfile(data) {
-    var imgSource = $('#profile-img').html();
-    var imgTemplate = Handlebars.compile(imgSource);  
-    var profileImgHtml = imgTemplate(data[0]);
-    $('#profileImg').append(profileImgHtml);
-    var infoSource = $('#profile-info').html();
-    var infoTemplate = Handlebars.compile(infoSource);  
-    var profileInfoHtml = infoTemplate(data[0]);
-    $('#profileInfo').append(profileInfoHtml);
+    var profileSource = $('#profile-info').html();
+    var profileTemplate = Handlebars.compile(profileSource);  
+    var profileInfoHtml = profileTemplate(data[0]);
+    $('#profile').append(profileInfoHtml);
   }
 
   // Show Places Success
-  function showPlaces(data) {
-    var source = $('#place-info').html();
-    var template = Handlebars.compile(source);  
+  function showPlaces(data) {  
+    allPlaces = data;
     var placeHtml = template({ place: data});
     $('#places').append(placeHtml);
   }
 
   // Delete Place Success
   function deletePlace(data) {
-    console.log(data)
+    console.log("data",data)
     var placeId = data._id;
+    // var elementId = '#'+data._id;
+    // console.log('delete place', placeId);
+    // $('#places').remove(elementId);
     console.log('delete place', placeId);
-    // // find the book with the correct ID and remove it from our allBooks array
-    // for(var index = 0; index < allBooks.length; index++) {
-    //   if(allBooks[index]._id === bookId) {
-    //     allBooks.splice(index, 1);
-    //     break;  // we found our book - no reason to keep searching (this is why we didn't use forEach)
-    //   }
-    // }
-    // render();
+    for(var index = 0; index < allPlaces.length; index++) {
+      if(allPlaces[index]._id === placeId) {
+        allPlaces.splice(index, 1);
+        break;  
+      }
+    }
+    render();
   }
 
   // New Place Success
   function newPlaceSuccess(data) {
-    $('#places').append('<strong>Description:</strong> '+data.description+'<br>');
-    $('#places').append('<strong>Place:</strong>'+data.town+', '+data.state+', '+data.country+'<br>');
+    // $('#places').append('<strong>Description:</strong> '+data.description+'<br>');
+    // $('#places').append('<strong>Place:</strong>'+data.town+', '+data.state+', '+data.country+'<br>');
+    // console.log("newPlace data",data);
+    // var source = $('#place-info').html();
+    // var template = Handlebars.compile(source);  
+    // var placeHtml = template({place: data});
+    // $('#places').append(placeHtml);
+    allPlaces.push(data);
+    render();
   };
 
   // Handle Error
   function handleError(err) {
     console.log(err);
   };
+
+  // Helper Function Render to Remove All And Re-Render List
+  function render () {
+    $('#places').empty();
+    var placesHTML = template({ place: allPlaces });
+    $('#places').append(placesHTML);
+  }
 
 });

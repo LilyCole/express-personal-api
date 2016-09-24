@@ -19,9 +19,9 @@ img {
   border-radius: 20px;
 }
 
-#profileInfo, .placeInfo, #newPlaceForm{
+#profile, .placeInfo {
   text-align: left;
-  padding: 0 0 0 5%;
+  padding: 2% 0 0 5%;
 }
 
 .deleteButton {
