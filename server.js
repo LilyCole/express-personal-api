@@ -113,6 +113,7 @@ app.delete('/api/places/:id', function deletePlace(req, res) {
   // remove place
   db.Place.remove({ _id: req.params.id }, function(err, place){
     if (err) { throw (err) };
+    console.log("RESPONDING WITH DELETE JSON:",place)
     res.json(place);
   });
 });

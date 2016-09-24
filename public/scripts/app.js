@@ -4,7 +4,8 @@ $(document).ready(function(){
 
   var source = $('#place-info').html();
   var template = Handlebars.compile(source); 
-  var allPlaces = [];
+  // var allPlaces = [];
+
 
   // AJAX to show profile Image and Information
   $.ajax({
@@ -47,7 +48,7 @@ $(document).ready(function(){
       error: handleError
     });
   });
-
+  
   // Show Profile Success
   function showProfile(data) {
     var profileSource = $('#profile-info').html();
@@ -58,26 +59,30 @@ $(document).ready(function(){
 
   // Show Places Success
   function showPlaces(data) {  
-    allPlaces = data;
-    var placeHtml = template({ place: data});
-    $('#places').append(placeHtml);
+    // allPlaces = data;
+    // var placeHtml = template({ place: data});
+    // $('#places').append(placeHtml);
+    data.forEach(function(value,index) {
+      var placeHtml = template(value);
+      $('#places').append(placeHtml);
+    });
   }
 
   // Delete Place Success
   function deletePlace(data) {
-    console.log("data",data)
+    console.log("delete data",data)
     var placeId = data._id;
     // var elementId = '#'+data._id;
     // console.log('delete place', placeId);
     // $('#places').remove(elementId);
-    console.log('delete place', placeId);
-    for(var index = 0; index < allPlaces.length; index++) {
-      if(allPlaces[index]._id === placeId) {
-        allPlaces.splice(index, 1);
-        break;  
-      }
-    }
-    render();
+    // console.log('delete place', placeId);
+    // for(var index = 0; index < allPlaces.length; index++) {
+    //   if(allPlaces[index]._id === placeId) {
+    //     allPlaces.splice(index, 1);
+    //     break;  
+    //   }
+    // }
+    // render();
   }
 
   // New Place Success
@@ -89,8 +94,11 @@ $(document).ready(function(){
     // var template = Handlebars.compile(source);  
     // var placeHtml = template({place: data});
     // $('#places').append(placeHtml);
-    allPlaces.push(data);
-    render();
+    // allPlaces.push(data);
+    // render();
+    console.log("add data:",data);
+    var placeHtml = template(data);
+    $('#places').append(placeHtml);
   };
 
   // Handle Error
@@ -99,10 +107,10 @@ $(document).ready(function(){
   };
 
   // Helper Function Render to Remove All And Re-Render List
-  function render () {
-    $('#places').empty();
-    var placesHTML = template({ place: allPlaces });
-    $('#places').append(placesHTML);
-  }
-
+  // function render () {
+  //   $('#places').empty();
+  //   var placesHTML = template({ place: allPlaces });
+  //   $('#places').append(placesHTML);
+  // }
+  
 });
