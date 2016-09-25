@@ -26,7 +26,7 @@ var newProfile = [ {
   githubProfileImage: 'https://avatars2.githubusercontent.com/u/20937116?v=3&s=466',
   personalSiteLink: 'https://lilycole.github.io/',
   currentCity: 'San Francisco',
-  pets: [{name: 'Goober', type: 'Cat', breed: 'Jerk'}, {name: 'Logan', type: 'Dog', breed: 'Pitt Mutt'}]
+  pets: [{name: 'Goober', type: 'Cat', breed: 'Jerk'}, {name: 'Logan', type: 'Dog', breed: 'Pit Mutt'}]
 } ];
 
 /************
@@ -70,6 +70,7 @@ app.get('/api', function api_index(req, res) {
       {method: "POST", path: "/api/places/", description: "Add a new Place"}, 
       {method: "DELETE", path: "/api/places/:id", description: "Delete a Specific Place"},
       {method: "PUT", path: "/api/places/:id", description: "Update a Specific Place. Not implemented on the front end."} 
+      {method: "GET", path: "/search", description: "Search for a query string in Place description, town, state or country."} 
     ]
   })
 });
@@ -155,6 +156,27 @@ app.put('/api/places/:id', function updatePlace(req, res) {
     if (err) { throw (err) };
     res.json(place);
   });
+});
+
+// '/api/search' searches description, town, state and country of a Place and returns the Place if it contains the query
+app.get('/search', function searchPlaces(req, res) {
+  var query = req.query.q;
+  var foundPlaces = [{search: 'results'}];
+  db.Place.find({}, function(err,places) {
+    if(err) { 
+      throw (err) 
+    } else {
+      places.forEach(function(place,index) {
+        if( (place.description.indexOf(query) !== -1) ||
+            (place.town.indexOf(query) !== -1) ||
+            (place.state.indexOf(query) !== -1) ||
+            (place.country.indexOf(query) !== -1)) {
+          foundPlaces.push(place);
+        }
+      });
+      res.json(foundPlaces)
+    }
+  })
 });
 
 /**********

@@ -28,6 +28,8 @@ adds a new Place and returns new JSON with _id
 deletes a Specific Place
 <h3>&#8226; method: "PUT", path: "/api/places/:id"</h3>
 updates a Specific Place and returns new JSON with _id. Not implemented on the front end
+<h3>&#8226; method: "GET", path: "/search"</h3>
+searches description, town, state and country of a Place and returns JSONs of Places that contain query string
 
 
 <h2>My AJAX Display Endpoints (In app.js)</h2>
