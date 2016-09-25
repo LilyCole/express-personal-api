@@ -69,7 +69,7 @@ app.get('/api', function api_index(req, res) {
       {method: "GET", path: "/api/places/:id", description: "Info on a Specific Place"},
       {method: "POST", path: "/api/places/", description: "Add a new Place"}, 
       {method: "DELETE", path: "/api/places/:id", description: "Delete a Specific Place"},
-      {method: "PUT", path: "/api/places/:id", description: "Update a Specific Place. Not implemented on the front end."} 
+      {method: "PUT", path: "/api/places/:id", description: "Update a Specific Place. Not implemented on the front end."}, 
       {method: "GET", path: "/search", description: "Search for a query string in Place description, town, state or country."} 
     ]
   })
