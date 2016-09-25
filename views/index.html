@@ -51,7 +51,7 @@
         </script>
       </div>
 
-      <!-- LIST OF PLACES --> <!-- {{#each place}} --> <!-- {{/each}} -->
+      <!-- LIST OF PLACES -->
       <div class="row" id="places">
         <script id="place-info" type="text/x-handlebars-template">
           
@@ -66,8 +66,23 @@
                 <p><strong>Lat:</strong> {{gps.lat}} <strong>Long:</strong> {{gps.long}}</p>
               </div>
               <div class="three columns">
+                <button type="submit" class="editButton" id={{_id}}><img id="edit" src="https://www.ccc.govt.nz/themes/ccc-default/images/icons/Pencil-hover-reverse.png"></button>
                 <button type="submit" class="deleteButton" id={{_id}}>DELETE</button>
               </div>
+            </div>
+
+           <div class="editFormRow">
+              <form id="editPlaceform" method="PUT" action="/api/places/">
+              <label id="formIntro" name="formIntro">Edit Fields:</label>
+              <input id="description" name="description" type="text" placeholder="Description of Place">
+              <input id="town" name="town" type="text" placeholder="Town">
+              <input id="state" name="state" type="text" placeholder="State">
+              <input id="country" name="country" type="text" placeholder="Country"><BR>
+              <input id="image" name="image" type="text" placeholder="Image URL">
+              <input id="years" name="years" type="number" placeholder="Years Lived There">
+              <input id="lat" name="lat" type="text" placeholder="Location: Latitude">
+              <input id="long" name="long" type="text" placeholder="Location: Longitude"><BR>
+              <input type="submit" value="UPDATE">
             </div>
           
         </script>

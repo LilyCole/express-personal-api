@@ -45,6 +45,13 @@ $(document).ready(function(){
     });
   });
 
+  // When user click on "Edit" button for specific Place, form appears
+  $('#places').on('click', '.editButton', function() {
+    var placeId = $(this).attr('id');
+    var placeElement = '.'+placeId;
+    $(placeElement).append("HI!");
+  });
+
   // Show Profile Success
   function showProfile(data) {
     var profileSource = $('#profile-info').html();
