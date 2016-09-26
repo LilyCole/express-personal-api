@@ -53,26 +53,25 @@
 
       <!-- LIST OF PLACES -->
       <div class="row" id="places">
-        <script id="place-info" type="text/x-handlebars-template">
-          
-            <div class="{{_id}} row">
-              <div class="three columns">
+      
+        <script id="place-info" type="text/x-handlebars-template">         
+            <div class="{{_id}} row displayPlace">
+              <div class="three columns displayPlace">
                 <img src="{{photo}}">
                 </div>
-              <div class="six columns placeInfo">
+              <div class="six columns placeInfo displayPlace">
                 <p><strong>Description:</strong> {{description}}</p>
                 <p><strong>Place:</strong> {{town}}, {{state}}, {{country}}</p>
                 <p><strong>Years Lived There:</strong>  {{years}}</p>
                 <p><strong>Lat:</strong> {{gps.lat}} <strong>Long:</strong> {{gps.long}}</p>
               </div>
-              <div class="three columns">
+              <div class="three columns displayPlace">
                 <button type="submit" class="editButton" data_id={{_id}}><img id="edit" src="https://www.ccc.govt.nz/themes/ccc-default/images/icons/Pencil-hover-reverse.png"></button>
                 <button type="submit" class="deleteButton" data_id={{_id}}>DELETE</button>
               </div>
             </div>
         </script>
             
-
         <script id="edit-place" type="text/x-handlebars-template">
            <div class="editFormRow">
               <form id="editPlaceForm" method="PUT" action="/api/places/" data_id={{_id}}>

@@ -15,7 +15,6 @@ app.use(function(req, res, next) {
   next();
 });
 
-
 /************************
  * HARDCODED PROFILE DATA *
  ************************/
@@ -69,7 +68,7 @@ app.get('/api', function api_index(req, res) {
       {method: "GET", path: "/api/places/:id", description: "Info on a Specific Place"},
       {method: "POST", path: "/api/places/", description: "Add a new Place"}, 
       {method: "DELETE", path: "/api/places/:id", description: "Delete a Specific Place"},
-      {method: "PUT", path: "/api/places/:id", description: "Update a Specific Place. Not implemented on the front end."}, 
+      {method: "PUT", path: "/api/places/:id", description: "Update a Specific Place."}, 
       {method: "GET", path: "/search", description: "Search for a query string in Place description, town, state or country."} 
     ]
   })
@@ -131,16 +130,14 @@ app.post('/api/places', function createPlace(req, res) {
 // '/api/places/:id' destroys a a Specific Place
 app.delete('/api/places/:id', function deletePlace(req, res) {
   db.Place.findByIdAndRemove(req.params.id, function(err, removePlace){
-    if (err) { console.log("error from delete:",err) };
+    if (err) { throw(err) };
     res.json(removePlace);
   });
 });
 
 // '/api/places/:id' udpates a a Specific Place
-// NOT IMPLEMENTED ON THE FRONT END
 app.put('/api/places/:id', function updatePlace(req, res) {
   db.Place.findOne({ _id: req.params.id }, function(err,foundPlace) {
-    console.log(foundPlace);
     foundPlace.description = req.body.editDescription,
     foundPlace.town = req.body.editTown,
     foundPlace.state = req.body.editState,
@@ -149,9 +146,9 @@ app.put('/api/places/:id', function updatePlace(req, res) {
     foundPlace.photo = req.body.editImage,
     foundPlace.gps.lat = req.body.editLat,
     foundPlace.gps.long = req.body.editLong
+
     foundPlace.save(function(err, place){
       if (err) { throw (err) };
-      console.log(place);
       res.json(place);
     });
   });

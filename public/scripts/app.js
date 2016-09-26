@@ -1,5 +1,3 @@
-console.log("Sanity Check: JS is working!");
-
 $(document).ready(function(){
 
   var source = $('#place-info').html();
@@ -34,6 +32,18 @@ $(document).ready(function(){
       });
     });
 
+  // When user click on "Edit" button for specific Place, form appears/disappears
+  $('#places').on('click', '.editButton', function() {
+    var placeId = $(this).attr('data_id');
+    var placeElement = '.'+placeId;
+    $.ajax({
+      method: 'GET',
+      url: 'api/places/' + placeId,
+      success: toggleEditForm,
+      error: handleError
+    });
+  });
+
   // When user click on "Delete" button for specific Place, AJAX DELETE request to destroy specific Place
   $('#places').on('click', '.deleteButton', function() {
     var endpoint = '/api/places/'+$(this).attr('data_id');
@@ -45,20 +55,6 @@ $(document).ready(function(){
       error: handleError
     });
   });
-
-  function addEditListener() {
-    // When user click on "Edit" button for specific Place, form appears/disappears
-    $('#places').on('click', '.editButton', function() {
-      var placeId = $(this).attr('data_id');
-      var placeElement = '.'+placeId;
-      $.ajax({
-        method: 'GET',
-        url: 'api/places/' + placeId,
-        success: toggleEditForm,
-        error: handleError
-      });
-    });
-  }
 
   function addUpdateListener() {
     // When user click on "UPDATE" button for specific Place, PUT is called
@@ -72,6 +68,7 @@ $(document).ready(function(){
           success: updatePlace,
           error: handleError
         });
+        editOpen=false;
     });
   }
 
@@ -89,7 +86,6 @@ $(document).ready(function(){
       var placeHtml = template(value);
       $('#places').append(placeHtml);
     });
-    addEditListener();
   }
 
   // New Place Success
@@ -128,15 +124,13 @@ $(document).ready(function(){
     var placeId = data._id;
     var placeElement = '.'+placeId;
     $('.editFormRow').detach();
-    $('#places').detach();
-    $("<div id='places'></div>").insertAfter('#profile');
+    $('.displayPlace').detach();
     $.ajax({
       method: 'GET',
       url: 'api/places',
       success: showPlaces,
       error: handleError
     })
-    addEditListener();
   }
 
   // Clear Form Data for Clean-Up

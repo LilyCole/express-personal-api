@@ -27,7 +27,7 @@ adds a new Place and returns new JSON with _id
 <h3>&#8226; method: "DELETE", path: "/api/places/:id"</h3>
 deletes a Specific Place
 <h3>&#8226; method: "PUT", path: "/api/places/:id"</h3>
-updates a Specific Place and returns new JSON with _id. Not implemented on the front end
+updates a Specific Place and returns new JSON with _id. 
 <h3>&#8226; method: "GET", path: "/search"</h3>
 searches description, town, state and country of a Place and returns JSONs of Places that contain query string
 
@@ -36,12 +36,23 @@ searches description, town, state and country of a Place and returns JSONs of Pl
 
 <h3>showProfile()</h3>
 uses Handlebars to iterate through hard-coded Profile and display on index.html
-<h3>showPlaes()</h3>
+<h3>showPlaces()</h3>
 users Handlebars to iterate through all Places in db and show on index.html
+<h3>addUpdateListener()</h3>
+adds Event Listener for UPDATE button once the form is present on page
+
+<h2>Helper Functions (In app.js)</h2>
+
+<h3>toggleEditForm()</h3>
+shows or hides Edit/Update form when the Edit button is pressed
+<h3>clearFormData()</h3>
+clears the values from Add New Place form after new Place is added
 <h3>newPlace()</h3>
 appends the new Place with Handlebars to the current Pace List, clears form data
 <h3>deletePlace()</h3>
 finds specified deleted Place and detaches it from the Place List
+<h3>updatePlace()</h3>
+finds specified Place and updates desired information
 
 <h2>My Schemas</h2>
 
