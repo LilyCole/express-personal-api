@@ -139,24 +139,24 @@ app.delete('/api/places/:id', function deletePlace(req, res) {
 // '/api/places/:id' udpates a a Specific Place
 // NOT IMPLEMENTED ON THE FRONT END
 app.put('/api/places/:id', function updatePlace(req, res) {
-  var updatedPlace = {};
-  db.Place.findByIdAndRemove({ _id: req.params.id }, function(err,removePlace) {
-    if(err) { throw (err) };
-    res.json(removePlace);
-  });
-  updatedPlace.description = req.body.description,
-  updatedPlace.town = req.body.town,
-  updatedPlace.state = req.body.state,
-  updatedPlace.country = req.body.country,
-  updatedPlace.years = req.body.years,
-  updatedPlace.photo = req.body.image,
-  updatedPlace.gps.lat = req.body.lat,
-  updatedPlace.gps.long = req.body.long
-  updatedPlace.save(function(err, place){
-    if (err) { throw (err) };
-    res.json(place);
+  db.Place.findOne({ _id: req.params.id }, function(err,foundPlace) {
+    console.log(foundPlace);
+    foundPlace.description = req.body.editDescription,
+    foundPlace.town = req.body.editTown,
+    foundPlace.state = req.body.editState,
+    foundPlace.country = req.body.editCountry,
+    foundPlace.years = req.body.editYears,
+    foundPlace.photo = req.body.editImage,
+    foundPlace.gps.lat = req.body.editLat,
+    foundPlace.gps.long = req.body.editLong
+    foundPlace.save(function(err, place){
+      if (err) { throw (err) };
+      console.log(place);
+      res.json(place);
+    });
   });
 });
+
 
 // '/api/search' searches description, town, state and country of a Place and returns the Place if it contains the query
 app.get('/search', function searchPlaces(req, res) {

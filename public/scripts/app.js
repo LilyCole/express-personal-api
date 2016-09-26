@@ -4,6 +4,7 @@ $(document).ready(function(){
 
   var source = $('#place-info').html();
   var template = Handlebars.compile(source); 
+  var editOpen = false;
 
   // AJAX GET to show profile Image and Information
   $.ajax({
@@ -35,7 +36,7 @@ $(document).ready(function(){
 
   // When user click on "Delete" button for specific Place, AJAX DELETE request to destroy specific Place
   $('#places').on('click', '.deleteButton', function() {
-    var endpoint = '/api/places/'+$(this).attr('id');
+    var endpoint = '/api/places/'+$(this).attr('data_id');
     $.ajax({
       method: 'DELETE',
       url: endpoint,
@@ -45,12 +46,34 @@ $(document).ready(function(){
     });
   });
 
-  // When user click on "Edit" button for specific Place, form appears
-  $('#places').on('click', '.editButton', function() {
-    var placeId = $(this).attr('id');
-    var placeElement = '.'+placeId;
-    $(placeElement).append("HI!");
-  });
+  function addEditListener() {
+    // When user click on "Edit" button for specific Place, form appears/disappears
+    $('#places').on('click', '.editButton', function() {
+      var placeId = $(this).attr('data_id');
+      var placeElement = '.'+placeId;
+      $.ajax({
+        method: 'GET',
+        url: 'api/places/' + placeId,
+        success: toggleEditForm,
+        error: handleError
+      });
+    });
+  }
+
+  function addUpdateListener() {
+    // When user click on "UPDATE" button for specific Place, PUT is called
+    $('#editPlaceForm').on('submit', function(e) {
+        e.preventDefault();
+        var placeId = $(this).attr('data_id');
+        $.ajax({
+          method: 'PUT',
+          url: '/api/places/'+placeId,
+          data: $(this).serializeArray(),
+          success: updatePlace,
+          error: handleError
+        });
+    });
+  }
 
   // Show Profile Success
   function showProfile(data) {
@@ -66,6 +89,7 @@ $(document).ready(function(){
       var placeHtml = template(value);
       $('#places').append(placeHtml);
     });
+    addEditListener();
   }
 
   // New Place Success
@@ -82,10 +106,38 @@ $(document).ready(function(){
     $(placeElement).detach();
   }
 
-  // Handle Error
-  function handleError(err) {
-    console.log("Err:",err);
+  // Toggle Edit Form On/Off
+  function toggleEditForm(data) {
+    var placeId = data._id;
+    var placeElement = '.'+placeId;
+    if(editOpen) {
+      $('.editFormRow').detach();
+      editOpen = false;
+    } else {
+      var editSource = $('#edit-place').html();
+      var editTemplate = Handlebars.compile(editSource);  
+      var editHtml = editTemplate(data);
+      $(placeElement).append(editHtml);
+      editOpen = true;
+      addUpdateListener();
+    }
   };
+
+  // Update Place Success
+  function updatePlace(data) {
+    var placeId = data._id;
+    var placeElement = '.'+placeId;
+    $('.editFormRow').detach();
+    $('#places').detach();
+    $("<div id='places'></div>").insertAfter('#profile');
+    $.ajax({
+      method: 'GET',
+      url: 'api/places',
+      success: showPlaces,
+      error: handleError
+    })
+    addEditListener();
+  }
 
   // Clear Form Data for Clean-Up
   function clearFormData() {
@@ -94,6 +146,11 @@ $(document).ready(function(){
     for(var i = 0; i < formFieldsLength-1; i++ ) {
       formFields[i].value = '';
     }
+  };
+
+  // Handle Error
+  function handleError(err) {
+    console.log("Err:",err);
   };
   
 });

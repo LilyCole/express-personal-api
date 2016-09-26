@@ -66,26 +66,29 @@
                 <p><strong>Lat:</strong> {{gps.lat}} <strong>Long:</strong> {{gps.long}}</p>
               </div>
               <div class="three columns">
-                <button type="submit" class="editButton" id={{_id}}><img id="edit" src="https://www.ccc.govt.nz/themes/ccc-default/images/icons/Pencil-hover-reverse.png"></button>
-                <button type="submit" class="deleteButton" id={{_id}}>DELETE</button>
+                <button type="submit" class="editButton" data_id={{_id}}><img id="edit" src="https://www.ccc.govt.nz/themes/ccc-default/images/icons/Pencil-hover-reverse.png"></button>
+                <button type="submit" class="deleteButton" data_id={{_id}}>DELETE</button>
               </div>
             </div>
+        </script>
+            
 
+        <script id="edit-place" type="text/x-handlebars-template">
            <div class="editFormRow">
-              <form id="editPlaceform" method="PUT" action="/api/places/">
-              <label id="formIntro" name="formIntro">Edit Fields:</label>
-              <input id="description" name="description" type="text" placeholder="Description of Place">
-              <input id="town" name="town" type="text" placeholder="Town">
-              <input id="state" name="state" type="text" placeholder="State">
-              <input id="country" name="country" type="text" placeholder="Country"><BR>
-              <input id="image" name="image" type="text" placeholder="Image URL">
-              <input id="years" name="years" type="number" placeholder="Years Lived There">
-              <input id="lat" name="lat" type="text" placeholder="Location: Latitude">
-              <input id="long" name="long" type="text" placeholder="Location: Longitude"><BR>
+              <form id="editPlaceForm" method="PUT" action="/api/places/" data_id={{_id}}>
+              <label id="editFormIntro" name="editFormIntro">Edit Fields:</label>
+              <input id="editDescription" name="editDescription" type="text" value={{description}} placeholder="Description of Place">
+              <input id="editTown" name="editTown" type="text" value={{town}} placeholder="Town">
+              <input id="editState" name="editState" type="text" value={{state}} placeholder="State">
+              <input id="editCountry" name="editCountry" type="text" value={{country}} placeholder="Country"><BR>
+              <input id="editImage" name="editImage" type="text" value={{photo}} placeholder="Image URL">
+              <input id="editYears" name="editYears" type="number" value={{years}} placeholder="Years Lived There">
+              <input id="editLat" name="editLat" type="text" value={{gps.lat}} placeholder="Location: Latitude">
+              <input id="editLong" name="editLong" type="text" value={{gps.long}} placeholder="Location: Longitude"><BR>
               <input type="submit" value="UPDATE">
             </div>
-          
-        </script>
+         </script> 
+        
       </div>
 
       <!-- NEW PLACE FORM -->
