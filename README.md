@@ -38,8 +38,12 @@ searches description, town, state and country of a Place and returns JSONs of Pl
 uses Handlebars to iterate through hard-coded Profile and display on index.html
 <h3>showPlaces()</h3>
 users Handlebars to iterate through all Places in db and show on index.html
-<h3>addUpdateListener()</h3>
-adds Event Listener for UPDATE button once the form is present on page
+<h3>newPlace()</h3>
+appends the new Place with Handlebars to the current Place List, clears form data
+<h3>deletePlace()</h3>
+finds specified deleted Place and detaches it from the Place List
+<h3>updatePlace()</h3>
+finds specified Place and updates desired information. removes all current Places from displays and re-renders.
 
 <h2>Helper Functions (In app.js)</h2>
 
@@ -47,12 +51,8 @@ adds Event Listener for UPDATE button once the form is present on page
 shows or hides Edit/Update form when the Edit button is pressed
 <h3>clearFormData()</h3>
 clears the values from Add New Place form after new Place is added
-<h3>newPlace()</h3>
-appends the new Place with Handlebars to the current Pace List, clears form data
-<h3>deletePlace()</h3>
-finds specified deleted Place and detaches it from the Place List
-<h3>updatePlace()</h3>
-finds specified Place and updates desired information
+<h3>addUpdateListener()</h3>
+adds Event Listener for UPDATE button once the form is present on page
 
 <h2>My Schemas</h2>
 
