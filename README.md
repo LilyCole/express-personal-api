@@ -17,9 +17,11 @@
 <li>Fork and clone this repo</li>
 <li>CD into created directory</li>
 <li>Start up MongoDB
-<code>> mongod</code>
+<code>> mongod</code></li>
 <li>In a new terminal install Node modules
 <code>> npm install</code></li>
+<li>Start up your server
+<code>> nodemon</code></li>
 <li>Navigate to: http://localhost:3000/</li>
 <li>CRUD to your heart's content!</li>
 </ol>
