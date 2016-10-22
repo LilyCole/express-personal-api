@@ -48,41 +48,47 @@
 
 <h2>My JSON API Endpoints (In server.js)</h2>
 
-<h3>method: "GET", path: "/api"</h3>
-JSON describes all available endpoints
-<h3>method: "GET", path: "/api/profile"</h3>
-JSON shows data about me 
-<h3>method: "GET", path: "/api/places"</h3>
-JSON shows all Places I've lived. Use ?limit=specifiedNumber query to show specified amount of Places.
-<h3>method: "GET", path: "/api/places/:id"</h3>
-JSON shows info on a Specific Place
-<h3>method: "POST", path: "/api/places/"</h3>
-adds a new Place and returns new JSON with _id
-<h3>method: "DELETE", path: "/api/places/:id"</h3>
-deletes a Specific Place
-<h3>method: "PUT", path: "/api/places/:id"</h3>
-updates a Specific Place and returns new JSON with _id. 
-<h3>method: "GET", path: "/search"</h3>
-searches description, town, state and country of a Place and returns JSONs of Places that contain query string
+<ul>
+<li><strong>method: "GET", path: "/api"</strong></br>
+JSON describes all available endpoints</li>
+<li><strong>method: "GET", path: "/api/profile"</strong></br>
+JSON shows data about me </li>
+<li><strong>method: "GET", path: "/api/places"</strong></br>
+JSON shows all Places I've lived. Use ?limit=specifiedNumber query to show specified amount of Places.</li>
+<li><strong>method: "GET", path: "/api/places/:id"</strong></br>
+JSON shows info on a Specific Place</li>
+<li><strong>method: "POST", path: "/api/places/"</strong></br>
+adds a new Place and returns new JSON with _id</li>
+<li><strong>method: "DELETE", path: "/api/places/:id"</strong></br>
+deletes a Specific Place</li>
+<li><strong>method: "PUT", path: "/api/places/:id"</strong></br>
+updates a Specific Place and returns new JSON with _id. </li>
+<li><strong>method: "GET", path: "/search"</strong></br>
+searches description, town, state and country of a Place and returns JSONs of Places that contain query string</li>
+</ul>
 
 <h2>My AJAX Display Endpoints (In app.js)</h2>
 
-<h3>showProfile()</h3>
-uses Handlebars to iterate through hard-coded Profile and display on index.html
-<h3>showPlaces()</h3>
-users Handlebars to iterate through all Places in db and show on index.html
-<h3>newPlace()</h3>
-appends the new Place with Handlebars to the current Place List, clears form data
-<h3>deletePlace()</h3>
-finds specified deleted Place and detaches it from the Place List
-<h3>updatePlace()</h3>
-finds specified Place and updates desired information. removes all current Places from displays and re-renders.
+<ul>
+<li><strong>showProfile()</strong></br>
+uses Handlebars to iterate through hard-coded Profile and display on index.html</li>
+<li><strong>showPlaces()</strong></br>
+users Handlebars to iterate through all Places in db and show on index.html</li>
+<li><strong>newPlace()</strong></br>
+appends the new Place with Handlebars to the current Place List, clears form data</li>
+<li><strong>deletePlace()</strong></br>
+finds specified deleted Place and detaches it from the Place List</li>
+<li><strong>updatePlace()</strong></br>
+finds specified Place and updates desired information. removes all current Places from displays and re-renders.</li>
+</ul>
 
 <h2>Helper Functions (In app.js)</h2>
 
-<h3>toggleEditForm()</h3>
-shows or hides Edit/Update form when the Edit button is pressed
-<h3>clearFormData()</h3>
-clears the values from Add New Place form after new Place is added
-<h3>addUpdateListener()</h3>
-adds Event Listener for UPDATE button once the form is present on page
+<ul>
+<li><strong>toggleEditForm()</strong></br>
+shows or hides Edit/Update form when the Edit button is pressed</li>
+<li><strong>clearFormData()</strong></br>
+clears the values from Add New Place form after new Place is added</li>
+<li><strong>addUpdateListener()</strong></br>
+adds Event Listener for UPDATE button once the form is present on page</li>
+</ul>
